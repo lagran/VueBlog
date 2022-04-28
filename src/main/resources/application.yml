@@ -5,8 +5,24 @@ spring:
     url: jdbc:mysql://localhost:3306/vueblog?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
     username: root
     password: 970709
+#  redis:
+#    host: localhost
+#    timeout: 5000
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**Mapper.xml
 
+shiro-redis:
+  enable: true
+  redis-manager:
+    host: 127.0.0.1:6379
+
 server:
   port: 8081
+
+funboy:
+  jwt:
+    # 部署上线务必修改此配置，以保证token的安全性
+    secret: f4e2e52034348f86b67cde581c0f9eb5
+    # Token有效时长两天 单位秒
+    expire: 172800
+    header: Authorization
