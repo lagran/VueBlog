@@ -20,7 +20,7 @@ public class CodeGenerator {
 
     /**
      * <p>
-     * 读取控制台内容
+     * 读取控制台内容: m_blog,m_user
      * </p>
      */
     public static String scanner(String tip) {
