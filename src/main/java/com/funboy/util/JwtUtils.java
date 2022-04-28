@@ -28,21 +28,23 @@ public class JwtUtils {
     /**
      * 生成 JWT Token 字符串
      *
-     * @param userId       签发人id
-     * expireDate       过期时间 签发时间
-     * claims           额外添加到荷部分的信息。
-     *                  例如可以添加用户名、用户ID、用户（加密前的）密码等信息
+     * @param userId 签发人id
+     *               expireDate       过期时间 签发时间
+     *               claims           额外添加到荷部分的信息。
+     *               例如可以添加用户名、用户ID、用户（加密前的）密码等信息
      */
-    public String generateToken(long userId,String username) {
+    //public String generateToken(long userId, String username) {
+    public String generateToken(long userId) {
         Date nowDate = new Date();
         //过期时间
         Date expireDate = new Date(nowDate.getTime() + expire * 1000);
-        Map<String, Object> claims = new HashMap<>();//创建payload的私有声明（根据特定的业务需要添加，如果要拿这个做验证，一般是需要和jwt的接收方提前沟通好验证方式的）
-        claims.put("userId", userId+"");
-        claims.put("username", username);
+        //Map<String, Object> claims = new HashMap<>();//创建payload的私有声明（根据特定的业务需要添加，如果要拿这个做验证，一般是需要和jwt的接收方提前沟通好验证方式的）
+        //claims.put("userId", userId + "");
+        //claims.put("username", username);
         return Jwts.builder()    // 创建 JWT 对象
                 .setHeaderParam("typ", "JWT")  //设置头部信息
-                .setClaims(claims)     // 设置私有声明
+                //.setClaims(claims)     // 设置私有声明
+                .setSubject(userId+"")
                 .setIssuedAt(nowDate)        //设置payload的签发时间
                 .setExpiration(expireDate)   //设置payload的过期时间
                 .signWith(SignatureAlgorithm.HS512, secret)  // 设置安全密钥（生成签名所需的密钥和算法）
